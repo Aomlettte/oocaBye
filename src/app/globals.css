@@ -905,6 +905,35 @@ body {
   display: block;
   width: 100%;
   height: auto;
+  /* develops like a polaroid: revealed band by band, washed-out tone settling in */
+  animation:
+    polaroid-bands 2.2s steps(14, end) 0.35s both,
+    polaroid-tone 2.6s ease-out 0.35s both;
+}
+@keyframes polaroid-bands {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes polaroid-tone {
+  0% {
+    filter: brightness(1.8) contrast(0.3) saturate(0.15);
+  }
+  55% {
+    filter: brightness(1.2) contrast(0.75) saturate(0.7);
+  }
+  100% {
+    filter: none;
+  }
+}
+/* the saved image must never catch a half-developed photo */
+.letter-frame.is-capture .letter__drawing img {
+  animation: none;
+  clip-path: none;
+  filter: none;
 }
 .letter__drawing figcaption {
   margin-top: 8px;
